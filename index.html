@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StandRework WebApp</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            background: #17212b;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        .card {
+            background: #232e3c;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .balance {
+            font-size: 32px;
+            font-weight: bold;
+            color: #6ab2f2;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #5288c1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+        .sign {
+            text-align: center;
+            color: #708499;
+            margin-top: 24px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>👤 Профиль</h2>
+        <p>Баланс голды:</p>
+        <div class="balance" id="balance">0</div>
+    </div>
+
+    <div class="card">
+        <h2>🔗 Рефералы</h2>
+        <p>Приглашено: <span id="refs">0</span></p>
+    </div>
+
+    <button class="btn" onclick="sendData()">✅ Я подписался</button>
+
+    <div class="sign">by dark, by amirzov production</div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        const initData = tg.initDataUnsafe;
+        if (initData.user) {
+            document.getElementById('balance').textContent = '1000';
+            document.getElementById('refs').textContent = '0';
+        }
+
+        function sendData() {
+            tg.sendData(JSON.stringify({ action: 'check_sub' }));
+        }
+    </script>
+</body>
+</html>
