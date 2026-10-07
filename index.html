@@ -6,58 +6,23 @@
     <title>StandRework WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body {
-            font-family: -apple-system, sans-serif;
-            background: #17212b;
-            color: #fff;
-            padding: 20px;
-            margin: 0;
-        }
-        .card {
-            background: #232e3c;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-        .balance {
-            font-size: 32px;
-            font-weight: bold;
-            color: #6ab2f2;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background: #5288c1;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-top: 12px;
-            cursor: pointer;
-        }
-        .sign {
-            text-align: center;
-            color: #708499;
-            margin-top: 24px;
-            font-size: 14px;
-        }
+        body { font-family: -apple-system, sans-serif; background: #17212b; color: #fff; padding: 20px; margin: 0; }
+        .card { background: #232e3c; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .balance { font-size: 32px; font-weight: bold; color: #6ab2f2; }
+        .btn { display: block; width: 100%; padding: 14px; background: #5288c1; color: #fff; border: none; border-radius: 8px; font-size: 16px; margin-top: 12px; cursor: pointer; }
+        .sign { text-align: center; color: #708499; margin-top: 24px; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>👤 Профиль</h2>
         <p>Баланс голды:</p>
-        <div class="balance" id="balance">0</div>
+        <div class="balance" id="balance">загрузка...</div>
     </div>
-
     <div class="card">
         <h2>🔗 Рефералы</h2>
-        <p>Приглашено: <span id="refs">0</span></p>
+        <p>Приглашено: <span id="refs">...</span></p>
     </div>
-
-    <button class="btn" onclick="sendData()">✅ Я подписался</button>
-
     <div class="sign">by dark, by amirzov production</div>
 
     <script>
@@ -65,15 +30,31 @@
         tg.ready();
         tg.expand();
 
-        const initData = tg.initDataUnsafe;
-        if (initData.user) {
-            document.getElementById('balance').textContent = '1000';
-            document.getElementById('refs').textContent = '0';
+        const API_URL = "https://standrework-webapp.onrender.com/api/balance";
+
+        async function loadBalance() {
+            try {
+                const initData = tg.initData;
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: "_auth=" + encodeURIComponent(initData)
+                });
+                const data = await response.json();
+                if (data.ok) {
+                    document.getElementById("balance").textContent = data.balance;
+                    document.getElementById("refs").textContent = data.referrals;
+                } else {
+                    document.getElementById("balance").textContent = "Ошибка: " + data.err;
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById("balance").textContent = "Сервер недоступен";
+                document.getElementById("refs").textContent = "—";
+            }
         }
 
-        function sendData() {
-            tg.sendData(JSON.stringify({ action: 'check_sub' }));
-        }
+        loadBalance();
     </script>
 </body>
 </html>
