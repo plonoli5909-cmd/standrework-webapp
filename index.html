@@ -1,60 +1,216 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StandRework WebApp</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { font-family: -apple-system, sans-serif; background: #17212b; color: #fff; padding: 20px; margin: 0; }
-        .card { background: #232e3c; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
-        .balance { font-size: 32px; font-weight: bold; color: #6ab2f2; }
-        .btn { display: block; width: 100%; padding: 14px; background: #5288c1; color: #fff; border: none; border-radius: 8px; font-size: 16px; margin-top: 12px; cursor: pointer; }
-        .sign { text-align: center; color: #708499; margin-top: 24px; font-size: 14px; }
-    </style>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08040f">
+<meta name="color-scheme" content="dark">
+<title>MediaFaceit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=126">
 </head>
 <body>
-    <div class="card">
-        <h2>👤 Профиль</h2>
-        <p>Баланс голды:</p>
-        <div class="balance" id="balance">загрузка...</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-swords" viewBox="0 0 24 24"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="M13 19l6-6M16 16l4 4M19 21l2-2"/><path d="M14.5 6.5 18 3h3v3l-3.5 3.5"/><path d="M5 14l4 4M7 17l-3 3M3 19l2 2"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8"/><path d="M12 8c-2-4-6-3.5-6-1s3 2.5 6 1zm0 0c2-4 6-3.5 6-1s-3 2.5-6 1z"/></symbol>
+<symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 9a2 2 0 0 0 0 6v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3a2 2 0 0 1 0-6V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1z"/><path d="M14 6v2M14 11v2M14 16v2"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
+<symbol id="i-allies" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/><path d="M5 19h14"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="i-idcard" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.5-1.7 1.7-2.5 3-2.5s2.5.8 3 2.5M14 10h4M14 14h4"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+<symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+<symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></symbol>
+<symbol id="i-bomb" viewBox="0 0 24 24"><circle cx="10" cy="15" r="6"/><path d="M14 9l3-3M16 4l4 4"/></symbol>
+<symbol id="i-exit" viewBox="0 0 24 24"><path d="M10 4H5v16h5M14 8l4 4-4 4M18 12H9"/></symbol>
+<symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></symbol>
+<symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+<symbol id="i-gamepad" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="10" rx="5"/><path d="M8 11v4M6 13h4M15.5 12h.01M18 14h.01"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 1.5-2-.6-1.2.2-2.5 1.6-2.5H17a4 4 0 0 0 4-4c0-5-4-9.5-9-9.5z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v3a1 1 0 0 0 1 1h3l8 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M19 9c1 .8 1.5 1.8 1.5 3s-.5 2.2-1.5 3"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+<symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-2 6z"/></symbol>
+</defs></svg>
+<div class="scene" aria-hidden="true"></div>
+<div class="app">
+<header class="top" aria-label="MediaFaceit">
+  <div class="brand">
+    <div class="user-header" id="userHeader" aria-live="polite" aria-label="Профиль игрока"></div>
+    <div class="brand-copy"><b>MediaFaceit</b><small>WEB APP • MATCHMAKING</small></div>
+  </div>
+  <button class="round refresh-button pressable" id="refresh" aria-label="Обновить"><svg class="ic ic-refresh" aria-hidden="true"><use href="#i-refresh"/></svg></button>
+</header>
+
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="hero-glass"></div>
+    <div class="eyebrow"><span></span> MEDIAFACEIT WEB APP</div>
+    <h1>Лобби.<br><em>Игры. И многое другое.</em></h1>
+    <p>MediaFaceit — лобби, игры и многое другое теперь в WebApp.</p>
+    <button class="cta pressable" data-page="matches"><span class="cta-icon"><svg class="ic ic-swords" aria-hidden="true"><use href="#i-swords"/></svg></span><b>Найти матч</b><span class="arrow">›</span></button>
+  </div>
+  <div class="section-title"><span>Быстрый доступ</span><small>6 разделов</small></div>
+  <div class="quick">
+    <button class="quick-card pressable quick-primary" data-page="matches"><strong><svg class="ic ic-swords" aria-hidden="true"><use href="#i-swords"/></svg></strong><b>Матчи</b><small>Найти игру</small><i>›</i></button>
+    <button class="quick-card pressable" data-page="top"><strong><svg class="ic ic-trophy" aria-hidden="true"><use href="#i-trophy"/></svg></strong><b>Игроки</b><small>Рейтинг MediaFaceit</small><i>›</i></button>
+    <button class="quick-card pressable" data-page="profile"><strong><svg class="ic ic-user" aria-hidden="true"><use href="#i-user"/></svg></strong><b>Профиль</b><small>ELO и статистика</small><i>›</i></button>
+    <button class="quick-card pressable" data-page="referrals"><strong><svg class="ic ic-gift" aria-hidden="true"><use href="#i-gift"/></svg></strong><b>Рефералы</b><small>Пригласить и получить Gold</small><i>›</i></button>
+    <button class="quick-card pressable" data-page="party"><strong><svg class="ic ic-users" aria-hidden="true"><use href="#i-users"/></svg></strong><b>Пати</b><small>Собери свою команду</small><i>›</i></button>
+    <button class="quick-card pressable" data-page="promo"><strong><svg class="ic ic-ticket" aria-hidden="true"><use href="#i-ticket"/></svg></strong><b>Промокоды</b><small>Активировать награду</small><i>›</i></button>
+  </div>
+  <div id="quickWidgets">
+    <section id="partyQuick" class="quick-widget"></section>
+    <section id="referralsQuick" class="quick-widget"></section>
+    <section id="promoQuick" class="quick-widget"></section>
+  </div>
+  <div class="live"><i></i><span id="onlineText">Синхронизация с ботом</span><b>LIVE</b></div>
+  <div id="registrationHome"></div>
+</section>
+
+<section id="matches" class="page">
+  <div class="heading"><button class="back pressable" data-page="home">‹</button><div><small>MEDIAFACEIT</small><h2>Матчи</h2></div></div>
+  <div id="activeMatch"></div>
+  <div id="formatChooser">
+    <div class="label">ФОРМАТ</div>
+    <div class="formats">
+      <button class="format pressable active" data-format="2x2"><svg class="ic ic-users" aria-hidden="true"><use href="#i-users"/></svg><b>2 × 2</b></button>
+      <button class="format pressable" data-format="3x3"><svg class="ic ic-target" aria-hidden="true"><use href="#i-target"/></svg><b>3 × 3</b></button>
+      <button class="format pressable" data-format="4x4"><svg class="ic ic-target" aria-hidden="true"><use href="#i-target"/></svg><b>4 × 4</b></button>
+      <button class="format pressable" data-format="5x5"><svg class="ic ic-target" aria-hidden="true"><use href="#i-target"/></svg><b>5 × 5</b></button>
     </div>
-    <div class="card">
-        <h2>🔗 Рефералы</h2>
-        <p>Приглашено: <span id="refs">...</span></p>
+    <div id="modeChooser" class="mode-row">
+      <button class="mode pressable active" data-mode="competitive"><svg class="ic ic-target" aria-hidden="true"><use href="#i-target"/></svg> Соревновательный</button>
+      <button class="mode pressable" data-mode="allies"><svg class="ic ic-allies" aria-hidden="true"><use href="#i-allies"/></svg> Союзники</button>
     </div>
-    <div class="sign">by dark, by amirzov production</div>
+    <div class="label lobby-label">ДОСТУПНЫЕ ИГРЫ</div>
+    <div id="lobbies" class="lobbies"></div>
+  </div>
+</section>
 
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
+<section id="top" class="page">
+  <div class="heading"><button class="back pressable" data-page="home">‹</button><div><small>MEDIAFACEIT</small><h2>Игроки</h2></div></div>
+  <div class="top-switch"><button class="pressable active" data-top-sort="elo">ELO</button><button class="pressable" data-top-sort="wins">Победы</button><button class="pressable" data-top-sort="kd">K/D</button></div>
+  <div id="leaderboard"></div>
+</section>
 
-        const API_URL = "https://standrework-webapp.onrender.com/api/balance";
+<section id="referrals" class="page">
+  <div class="heading"><button class="back pressable" data-page="home">‹</button><div><small>MEDIAFACEIT</small><h2>Рефералы</h2></div></div>
+  <div id="referralsPage"></div>
+</section>
 
-        async function loadBalance() {
-            try {
-                const initData = tg.initData;
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: "_auth=" + encodeURIComponent(initData)
-                });
-                const data = await response.json();
-                if (data.ok) {
-                    document.getElementById("balance").textContent = data.balance;
-                    document.getElementById("refs").textContent = data.referrals;
-                } else {
-                    document.getElementById("balance").textContent = "Ошибка: " + data.err;
-                }
-            } catch (e) {
-                console.error(e);
-                document.getElementById("balance").textContent = "Сервер недоступен";
-                document.getElementById("refs").textContent = "—";
-            }
-        }
+<section id="party" class="page">
+  <div class="heading"><button class="back pressable" data-page="home">‹</button><div><small>MEDIAFACEIT</small><h2>Твоя пати</h2></div></div>
+  <div id="partyPage"></div>
+</section>
 
-        loadBalance();
-    </script>
+<section id="promo" class="page">
+  <div class="heading"><button class="back pressable" data-page="home">‹</button><div><small>MEDIAFACEIT</small><h2>Промокоды</h2></div></div>
+  <div id="promoPage"></div>
+</section>
+
+<section id="owner" class="page owner-page">
+  <div class="heading"><button class="back pressable" data-page="profile">‹</button><div><small>MEDIAFACEIT • PRIVATE</small><h2>Владелец</h2></div><button class="round pressable" id="ownerRefresh" aria-label="Обновить"><svg class="ic ic-refresh" aria-hidden="true"><use href="#i-refresh"/></svg></button></div>
+  <div class="owner-hero"><div class="owner-crown"><svg class="ic ic-crown" aria-hidden="true"><use href="#i-crown"/></svg></div><div><b>@motkabeta</b><small>Полный контроль MediaFaceit</small></div><span>OWNER</span></div>
+  <div id="ownerStats" class="owner-stats"></div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-user" aria-hidden="true"><use href="#i-user"/></svg> Управление игроком</b><small>TG ID / @username / FACEIT ID / ник</small></div>
+    <div class="owner-form"><input id="ownerTarget" class="owner-input" placeholder="@username или TG ID"><button id="ownerFind" class="action pressable"><svg class="ic ic-search" aria-hidden="true"><use href="#i-search"/></svg> Найти</button></div>
+    <div id="ownerFound" class="owner-found empty">Игрок не выбран.</div>
+    <div class="owner-grid">
+      <button class="owner-action pressable" data-owner-op="give_mc"><svg class="ic ic-coin" aria-hidden="true"><use href="#i-coin"/></svg> Выдать MC</button><button class="owner-action pressable" data-owner-op="take_mc"><svg class="ic ic-minus" aria-hidden="true"><use href="#i-minus"/></svg> Снять MC</button>
+      <button class="owner-action pressable" data-owner-op="give_elo"><svg class="ic ic-chart" aria-hidden="true"><use href="#i-chart"/></svg> Выдать ELO</button><button class="owner-action pressable" data-owner-op="give_calibration"><svg class="ic ic-target" aria-hidden="true"><use href="#i-target"/></svg> Калибровка</button>
+      <button class="owner-action pressable" data-owner-op="give_ref"><svg class="ic ic-coin" aria-hidden="true"><use href="#i-coin"/></svg> Выдать Gold</button><button class="owner-action pressable" data-owner-op="take_ref"><svg class="ic ic-minus" aria-hidden="true"><use href="#i-minus"/></svg> Снять Gold</button>
+      <button class="owner-action pressable" data-owner-op="make_admin"><svg class="ic ic-shield" aria-hidden="true"><use href="#i-shield"/></svg> Назначить админа</button><button class="owner-action pressable" data-owner-op="clear_warns"><svg class="ic ic-refresh" aria-hidden="true"><use href="#i-refresh"/></svg> Сбросить варны</button>
+      <button class="owner-action pressable" data-owner-op="unmute"><svg class="ic ic-unlock" aria-hidden="true"><use href="#i-unlock"/></svg> Снять мут</button><button class="owner-action pressable danger-soft" data-owner-op="ban"><svg class="ic ic-ban" aria-hidden="true"><use href="#i-ban"/></svg> Бан в матчах</button>
+      <button class="owner-action pressable" data-owner-op="unban"><svg class="ic ic-unlock" aria-hidden="true"><use href="#i-unlock"/></svg> Снять бан</button><button class="owner-action pressable danger-soft" data-owner-op="warn"><svg class="ic ic-warning" aria-hidden="true"><use href="#i-warning"/></svg> Выдать варн</button>
+    </div>
+    <div class="owner-form two"><input id="ownerAmount" class="owner-input" type="number" placeholder="Количество / ELO / матчи"><input id="ownerReason" class="owner-input" placeholder="Причина варна (для варна)"></div>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-tag" aria-hidden="true"><use href="#i-tag"/></svg> Префиксы и кастомизация</b><small>Выдача прямо из Mini App</small></div>
+    <div class="owner-form three"><select id="prefixSelect" class="owner-input"><option value="">Префикс</option></select><select id="prefixMode" class="owner-input"><option value="replace">Заменить</option><option value="add">Добавить</option></select><button id="givePrefix" class="action pressable">Выдать</button></div>
+    <div class="owner-form three"><select id="customTier" class="owner-input"><option value="ordinary">Обычная</option><option value="eternal">Вечная</option></select><select id="customKind" class="owner-input"><option value="banner">Баннер</option><option value="background">Фон</option><option value="color">Цвет ника</option><option value="prefix">Префикс</option></select><button id="grantCustom" class="action pressable"><svg class="ic ic-gift" aria-hidden="true"><use href="#i-gift"/></svg> Выдать</button></div>
+    <div class="media-upload"><div><b><svg class="ic ic-sparkles" aria-hidden="true"><use href="#i-sparkles"/></svg> Медиа-префикс</b><small>PNG/JPG/WEBP/GIF/WEBM/MP4 до 20 MB</small></div><input id="prefixFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm"><button id="uploadPrefix" class="action pressable">Загрузить</button></div>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-gamepad" aria-hidden="true"><use href="#i-gamepad"/></svg> Профиль игрока</b><small>FACEIT ID / ник</small></div>
+    <div class="owner-form three"><input id="identityValue" class="owner-input" placeholder="Новое значение"><button class="action pressable identity-btn" data-field="faceit_id"><svg class="ic ic-idcard" aria-hidden="true"><use href="#i-idcard"/></svg> ID</button><button class="action pressable identity-btn" data-field="nick"><svg class="ic ic-gamepad" aria-hidden="true"><use href="#i-gamepad"/></svg> Ник</button></div>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-trash" aria-hidden="true"><use href="#i-trash"/></svg> Матчи</b><small>Опасные действия требуют подтверждения</small></div>
+    <div class="owner-form"><input id="matchCode" class="owner-input" placeholder="Код матча, например ABC123"><button id="deleteMatch" class="action danger pressable">Удалить матч</button></div>
+    <button id="deleteAllMatches" class="action danger pressable full"><svg class="ic ic-warning" aria-hidden="true"><use href="#i-warning"/></svg> Удалить ВСЕ матчи</button>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-sparkles" aria-hidden="true"><use href="#i-sparkles"/></svg> Ивенты</b><small>Создание и отключение</small></div>
+    <div class="owner-form"><input id="eventTitle" class="owner-input" placeholder="Название"><input id="eventDuration" class="owner-input" type="number" placeholder="Минуты"></div>
+    <div class="owner-form"><input id="eventPrize" class="owner-input" placeholder="Приз"><textarea id="eventBody" class="owner-input" placeholder="Описание"></textarea></div>
+    <button id="createEvent" class="action pressable full"><svg class="ic ic-sparkles" aria-hidden="true"><use href="#i-sparkles"/></svg> Создать и опубликовать</button>
+    <div id="eventsList" class="owner-list"></div>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-ticket" aria-hidden="true"><use href="#i-ticket"/></svg> Промокод</b><small>Все типы из текущей панели владельца</small></div>
+    <div class="owner-form three"><select id="promoType" class="owner-input"><option value="mc">MC</option><option value="gold">Gold</option><option value="discount">Скидка</option><option value="bonus">Доп. покупка</option></select><input id="promoValue" class="owner-input" type="number" placeholder="Значение"><input id="promoUses" class="owner-input" type="number" placeholder="Активации"></div>
+    <div class="owner-form two"><input id="promoHours" class="owner-input" type="number" placeholder="Часы (для скидки/бонуса)"><input id="promoCode" class="owner-input" placeholder="Код (необязательно)"></div>
+    <button id="createPromo" class="action pressable full"><svg class="ic ic-ticket" aria-hidden="true"><use href="#i-ticket"/></svg> Создать промокод</button>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-megaphone" aria-hidden="true"><use href="#i-megaphone"/></svg> Рассылка</b><small>Отправка от имени бота</small></div>
+    <textarea id="broadcastText" class="owner-input big" placeholder="Текст рассылки"></textarea>
+    <div class="owner-form three"><select id="broadcastLimit" class="owner-input"><option value="50">50</option><option value="100">100</option><option value="250">250</option><option value="all">ALL</option></select><button id="broadcastSend" class="action pressable"><svg class="ic ic-megaphone" aria-hidden="true"><use href="#i-megaphone"/></svg> Отправить</button><button id="broadcastStats" class="action pressable"><svg class="ic ic-chart" aria-hidden="true"><use href="#i-chart"/></svg> Статус</button></div>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-chat" aria-hidden="true"><use href="#i-chat"/></svg> ФК</b><small>Комм / клик</small></div>
+    <div class="owner-form"><input id="fkWord" class="owner-input" value="фк" placeholder="Слово для ФК-комм"><button id="fkComm" class="action pressable"><svg class="ic ic-chat" aria-hidden="true"><use href="#i-chat"/></svg> ФК комм</button></div>
+    <div class="owner-form"><input id="fkCount" class="owner-input" type="number" value="10" placeholder="Участников"><button id="fkClick" class="action pressable"><svg class="ic ic-cursor" aria-hidden="true"><use href="#i-cursor"/></svg> ФК клик</button></div>
+  </div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-coin" aria-hidden="true"><use href="#i-coin"/></svg> Выводы Gold</b><small>Проверка и решение заявок</small></div><div id="withdrawalsList" class="owner-list"></div><button id="loadWithdrawals" class="action pressable full"><svg class="ic ic-refresh" aria-hidden="true"><use href="#i-refresh"/></svg> Обновить заявки</button></div>
+
+  <div class="owner-section"><div class="owner-title"><b><svg class="ic ic-gift" aria-hidden="true"><use href="#i-gift"/></svg> Сложные операции</b><small>Аккаунт подарков и операции, требующие Telegram-авторизации</small></div><button id="ownerChatPanel" class="action pressable full"><svg class="ic ic-gift" aria-hidden="true"><use href="#i-gift"/></svg> Открыть подарочный аккаунт в чате</button></div>
+</section>
+
+<section id="profile" class="page">
+  <div class="heading"><button class="back pressable" data-page="home">‹</button><div><small>MEDIAFACEIT</small><h2>Твой профиль</h2></div></div>
+  <div id="profileCard"></div>
+</section>
+</div>
+
+<nav class="nav" aria-label="Навигация">
+ <button class="active pressable" data-page="home"><span><svg class="ic ic-home" aria-hidden="true"><use href="#i-home"/></svg></span><b>Главная</b></button>
+ <button class="pressable" data-page="matches"><span><svg class="ic ic-swords" aria-hidden="true"><use href="#i-swords"/></svg></span><b>Матчи</b></button>
+ <button class="pressable" data-page="top"><span><svg class="ic ic-trophy" aria-hidden="true"><use href="#i-trophy"/></svg></span><b>Игроки</b></button>
+ <button class="pressable" data-page="profile"><span><svg class="ic ic-user" aria-hidden="true"><use href="#i-user"/></svg></span><b>Профиль</b></button>
+</nav>
+<div id="playerModal" class="modal"><div class="modal-backdrop" id="modalBackdrop"></div><div class="modal-card" id="playerModalCard"></div></div>
+<div id="toast"></div>
+<script src="https://telegram.org/js/telegram-web-app.js?63"></script>
+<script src="https://cdn.jsdelivr.net/npm/twemoji@latest/dist/twemoji.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js?v=126"></script>
 </body>
 </html>
